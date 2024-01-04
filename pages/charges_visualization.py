@@ -3,6 +3,7 @@ import streamlit as st
 import seaborn as sns
 st.title("Charges Visualizer-Inator")
 if 'charges' in st.session_state:
+  charges = st.session_state.charges
   with st.sidebar:
     option = st.selectbox("What visualization would you like to see?"
                           ,('Histogram','Box Plot', 'Swarm Plot by Category'))
