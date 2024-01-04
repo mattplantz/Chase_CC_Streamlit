@@ -29,15 +29,14 @@ with st.sidebar:
 if Flag_Charges:
     st.write("Please input the parameters for your search")
     text_to_find = st.text_input("What text would you like to flag? Please separate multiple search terms with '|'", '')
-    if text_to_find != '':
-        if 'charges' in st.session_state:
-            charges = st.session_state.charges
-            charges['Flag'] = charges['Description'].str.contains(text_to_find).astype(int)
-            st.session_state['charges'] = charges
-            st.subheader("Flagged Instances")
-            st.dataframe(charges[charges['Flag'] == 1])
-            st.write("There are ", charges['Flag'].sum(), "instances of your flag")
-            flagged_sum = charges.loc[charges['Flag'] == 1, 'Amount'].sum()
-            st.write("The flagged charges have a total value of $", round(flagged_sum,2))
-        else:
-            st.write("Please upload your CC files")
+    if text_to_find != '' and 'charges' in st.session_state:
+        charges = st.session_state.charges
+        charges['Flag'] = charges['Description'].str.contains(text_to_find).astype(int)
+        st.session_state['charges'] = charges
+        st.subheader("Flagged Instances")
+        st.dataframe(charges[charges['Flag'] == 1])
+        st.write("There are ", charges['Flag'].sum(), "instances of your flag")
+        flagged_sum = charges.loc[charges['Flag'] == 1, 'Amount'].sum()
+        st.write("The flagged charges have a total value of $", round(flagged_sum,2))
+    else:
+        st.write("Please upload your CC files or add text to search")
