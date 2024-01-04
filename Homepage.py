@@ -22,7 +22,7 @@ if uploaded_files:
     
 with st.sidebar:
     Flag_Charges = st.checkbox("Flag Specific Charges")
-    
+    Over_val = st.checkbox("Flag Charges Over $XX")
 if Flag_Charges:
     st.write("Please input the parameters for your search")
     text_to_find = st.text_input("What text would you like to flag? Please separate multiple search terms with '|'", '')
@@ -39,3 +39,10 @@ if Flag_Charges:
         st.write("Please upload your CC files")
     elif text_to_find == '' and 'charges' in st.session_state:
         st.write("Please add text to flag")
+if Over_val:
+    charges = st.session_state.charges
+    user_input = st.number_input("Flag charges over this value", placeholder = 50)
+    flagged = charges[charges['Amount'] >= user_input]
+    st.dataframe(flagged)
+    st.write("There are", flagged.shape[0], "charges over the input value")
+    st.write("The flagged charges have a total value of $", round(flagged['Amount'].sum(),2))
