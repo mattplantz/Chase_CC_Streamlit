@@ -29,7 +29,8 @@ if 'charges' in st.session_state:
       st.pyplot(swarm.get_figure())
   if option == 'Number of Charges by Category':
     st.subheader('Charges by Category')
-    count = sns.countplot(data = charges, x = 'Category', orient = 'h')
+    count = sns.countplot(data = charges, x = 'Category')
+    count.set_xticklabels(count.get_xticklabels(), rotation=40, ha="right")
     st.pyplot(count.get_figure())
 else:
   st.write('Please upload csv files on the main page')
