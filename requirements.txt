@@ -1,4 +1,6 @@
 pandas
 streamlit
 numpy
-seaborn == 0.12.2
+matplotlib
+seaborn
+plotly
