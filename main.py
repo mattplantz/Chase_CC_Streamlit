@@ -4,7 +4,8 @@ import streamlit as st
 st.title("Chase Credit Card Statement Reader-Inator")
 
 uploaded_files = st.file_uploader("Please upload your Chase CC Account Activity", type = ['csv'], accept_multiple_files= True)
-
+if uploaded_files not in st.session_state:
+    st.session_state.uploaded_files = uploaded_files
 if uploaded_files:
     read_data = [pd.read_csv(file) for file in uploaded_files]
     df = pd.concat(read_data)
