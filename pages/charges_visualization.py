@@ -6,7 +6,7 @@ if 'charges' in st.session_state:
   charges = st.session_state.charges
   with st.sidebar:
     option = st.selectbox("What visualization would you like to see?"
-                          ,('Histogram','Box Plot', 'Swarm Plot by Category'))
+                          ,('Histogram','Box Plot', 'Swarm Plot by Category', 'Number of Charges by Category'))
     
   if option == 'Histogram':
       st.subheader('Histogram of All Charges')
@@ -27,5 +27,9 @@ if 'charges' in st.session_state:
       st.subheader('Swarm plot of Charges by Category')
       swarm = sns.swarmplot(data = charges, x = 'Amount', y = 'Category', hue = 'Category', legend = False)
       st.pyplot(swarm.get_figure())
+  if option == 'Number of Charges by Category':
+    st.suheader('Charges by Category')
+    count = sns.countplot(data = charges, x = 'Category')
+    st.pyplot(count.get_figure())
 else:
   st.write('Please upload csv files on the main page')
