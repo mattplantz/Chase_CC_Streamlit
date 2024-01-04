@@ -7,9 +7,6 @@ uploaded_files = st.file_uploader("Please upload your Chase CC Account Activity"
 if uploaded_files not in st.session_state:
     st.session_state.uploaded_files = uploaded_files
 if uploaded_files:
-    if 'df' in st.session_state:
-        df = st.session_state.df
-    else:
         read_data = [pd.read_csv(file) for file in uploaded_files]
         df = pd.concat(read_data)
         # flip sign of amount
