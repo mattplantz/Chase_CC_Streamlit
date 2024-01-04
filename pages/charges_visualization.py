@@ -1,6 +1,5 @@
 import pandas as pd
 import streamlit as st
-pip install seaborn
 import seaborn as sns
 
 if 'charges' in st.session_state:
