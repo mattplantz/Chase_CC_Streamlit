@@ -31,10 +31,10 @@ if Flag_Charges:
         charges['Flag'] = charges['Description'].str.contains(text_to_find).astype(int)
         st.session_state['charges'] = charges
         st.subheader("Flagged Instances")
-        st.dataframe(charges[charges['Flag'] == 1])
         st.write("There are ", charges['Flag'].sum(), "instances of your flag")
         flagged_sum = charges.loc[charges['Flag'] == 1, 'Amount'].sum()
         st.write("The flagged charges have a total value of $", round(flagged_sum,2))
+        st.dataframe(charges[charges['Flag'] == 1])
     elif text_to_find != '' and 'charges' not in st.session_state:
         st.write("Please upload your CC files")
     elif text_to_find == '' and 'charges' in st.session_state:
@@ -43,6 +43,7 @@ if Over_val:
     charges = st.session_state.charges
     user_input = st.number_input("Flag charges over this value", placeholder = 50)
     flagged = charges[charges['Amount'] >= user_input]
-    st.dataframe(flagged)
     st.write("There are", flagged.shape[0], "charges over the input value")
     st.write("The flagged charges have a total value of $", round(flagged['Amount'].sum(),2))
+    st.dataframe(flagged)
+    
