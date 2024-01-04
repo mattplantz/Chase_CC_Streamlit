@@ -39,3 +39,5 @@ if Flag_Charges:
             st.write("There are ", charges['Flag'].sum(), "instances of your flag")
             flagged_sum = charges.loc[charges['Flag'] == 1, 'Amount'].sum()
             st.write("The flagged charges have a total value of $", round(flagged_sum,2))
+        else:
+            st.write("Please upload your CC files")
