@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import seaborn as sns
+import matplotlib.pyplot as plt
 st.title("Charges Visualizer-Inator")
 if 'charges' in st.session_state:
   charges = st.session_state.charges
