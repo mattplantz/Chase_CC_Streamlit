@@ -38,5 +38,7 @@ if Flag_Charges:
         st.write("There are ", charges['Flag'].sum(), "instances of your flag")
         flagged_sum = charges.loc[charges['Flag'] == 1, 'Amount'].sum()
         st.write("The flagged charges have a total value of $", round(flagged_sum,2))
-    else:
-        st.write("Please upload your CC files or add text to search")
+    elif text_to_find != '' and 'charges' not in st.session_state:
+        st.write("Please upload your CC files")
+    elif text_to_find == '' and 'charges' in st.session_state:
+        st.write("Please add text to flag")
