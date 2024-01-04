@@ -28,7 +28,7 @@ if 'charges' in st.session_state:
       swarm = sns.swarmplot(data = charges, x = 'Amount', y = 'Category', hue = 'Category', legend = False)
       st.pyplot(swarm.get_figure())
   if option == 'Number of Charges by Category':
-    st.suheader('Charges by Category')
+    st.subheader('Charges by Category')
     count = sns.countplot(data = charges, x = 'Category')
     st.pyplot(count.get_figure())
 else:
