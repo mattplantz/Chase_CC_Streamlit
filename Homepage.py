@@ -43,7 +43,7 @@ if Over_val:
     charges = st.session_state.charges
     user_input = st.number_input("Flag charges over this value", placeholder = 50)
     flagged = charges[charges['Amount'] >= user_input]
-    st.write("There are", flagged.shape[0], "charges over the input value")
+    st.write("There are", flagged.shape[0], "charges over $", user_input)
     st.write("The flagged charges have a total value of $", round(flagged['Amount'].sum(),2))
     st.dataframe(flagged)
     
