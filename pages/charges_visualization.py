@@ -5,13 +5,24 @@ import matplotlib.pyplot as plt
 st.title("Charges Visualizer")
 if 'charges' in st.session_state:
   charges = st.session_state.charges
+  charges['Month'] = pd.DatetimeIndex(charges['Transaction Date']).month
+  charges['Month'] = charges['Month'].astype(str)
+  for i, row in charges.iterrows():
+      if len(row['Month']) == 1:
+          charges.loc[i, 'Month'] = '0' + row['Month']
+      else:
+          continue
+  charges['Year'] = pd.DatetimeIndex(charges['Transaction Date']).year
+  charges['YearMo'] = charges['Year'].astype(str) + charges['Month'].astype(str)
+  charges['YearMo'] = charges['YearMo'].astype(int)
   with st.sidebar:
     option = st.selectbox("What visualization would you like to see?"
                           ,('Histogram'
                             ,'Box Plot'
                             ,'Swarm Plot by Category'
                             ,'Number of Charges by Category'
-                            , 'Monthly Spending'))
+                            , 'Monthly Spending'
+                           , 'Violin Distribution))
     
   if option == 'Histogram':
       st.subheader('Histogram of All Charges')
@@ -40,16 +51,6 @@ if 'charges' in st.session_state:
   if option == 'Monthly Spending':
     st.subheader('Spending by Month')
     legend = st.checkbox('Would you like to see the charges colored by category?')
-    charges['Month'] = pd.DatetimeIndex(charges['Transaction Date']).month
-    charges['Month'] = charges['Month'].astype(str)
-    for i, row in charges.iterrows():
-        if len(row['Month']) == 1:
-            charges.loc[i, 'Month'] = '0' + row['Month']
-        else:
-            continue
-    charges['Year'] = pd.DatetimeIndex(charges['Transaction Date']).year
-    charges['YearMo'] = charges['Year'].astype(str) + charges['Month'].astype(str)
-    charges['YearMo'] = charges['YearMo'].astype(int)
     if legend:
         monthly = sns.stripplot(data = charges, x = 'YearMo', y = 'Amount', hue = 'Category', legend = 'brief')
         monthly.set_xticklabels(monthly.get_xticklabels(), rotation=40, ha="right")
@@ -59,5 +60,20 @@ if 'charges' in st.session_state:
         monthly = sns.stripplot(data = charges, x = 'YearMo', y = 'Amount')
         monthly.set_xticklabels(monthly.get_xticklabels(), rotation=40, ha="right")
         st.pyplot(monthly.get_figure())
+  if option == 'Violin Distribution':
+    st.subheader('Violin Distribution of Charges')
+    opt = st.selectbox("Do you want to separate the plots by one of the following categories?"
+                 , ('By Month & Year'
+                    , 'By Category'
+                    , 'None'))
+    if opt == 'By Month & Year':
+        violin = sns.violinplot(data = charges, x = 'Amount', y = 'YearMo')
+        st.pyplot(violin.get_figure())
+    if opt == 'By Category':
+        violin = sns.violinplot(data = charges, x = 'Amount', y = 'Category')
+        st.pyplot(violin.get_figure())
+    if opt == 'None':
+        violin = sns.violinplot(data = charges, x = 'Amount')
+        st.pyplot(violin.get_figure())
 else:
   st.write('Please upload csv files on the main page')
