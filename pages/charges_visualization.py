@@ -22,7 +22,7 @@ if 'charges' in st.session_state:
                             ,'Swarm Plot by Category'
                             ,'Number of Charges by Category'
                             , 'Monthly Spending'
-                           , 'Violin Distribution))
+                           , 'Violin Distribution'))
     
   if option == 'Histogram':
       st.subheader('Histogram of All Charges')
