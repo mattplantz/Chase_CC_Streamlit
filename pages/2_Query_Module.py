@@ -128,4 +128,4 @@ if 'charges' in st.session_state:
   st.write("The flagged charges have a total value of $", round(results_sum,2))
   st.dataframe(results)
 else:
-  st.write('Please upload csv files on the main page')
+  st.write('Please upload csv files on the Upload Landing Page')
