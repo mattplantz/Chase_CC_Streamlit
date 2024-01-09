@@ -60,4 +60,4 @@ if 'charges' in st.session_state:
         monthly.set_xticklabels(monthly.get_xticklabels(), rotation=40, ha="right")
         st.pyplot(monthly.get_figure())
 else:
-  st.write('Please upload csv files on the main page')
+  st.write('Please upload csv files on the Upload Landing Page')
