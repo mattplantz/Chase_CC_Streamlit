@@ -21,7 +21,7 @@ if 'charges' in st.session_state:
                             ,'Box Plot'
                             ,'Swarm Plot by Category'
                             ,'Number of Charges by Category'
-                            , 'Monthly Spending'))
+                            , 'Monthly Spending Distribution'))
     
   if option == 'Histogram':
       st.subheader('Histogram of All Charges')
@@ -47,8 +47,8 @@ if 'charges' in st.session_state:
     count = sns.countplot(data = charges, x = 'Category')
     count.set_xticklabels(count.get_xticklabels(), rotation=40, ha="right")
     st.pyplot(count.get_figure())
-  if option == 'Monthly Spending':
-    st.subheader('Spending by Month')
+  if option == 'Monthly Spending Distribution':
+    st.subheader('Spending Distribution by Year and Month')
     legend = st.checkbox('Would you like to see the charges colored by category?')
     if legend:
         monthly = sns.stripplot(data = charges, x = 'YearMo', y = 'Amount', hue = 'Category', legend = 'brief')
