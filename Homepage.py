@@ -14,7 +14,7 @@ if uploaded_files:
     
         # separate payments and charges
         charges = df[df['Type'] == 'Sale']
-        charges['Description'] = charges['Description'].apply(lambda x: x.str.upper())
+        charges['Description'] = charges['Description'].apply(lambda x: x.upper())
         payments = df[df['Type'] == 'Payment']
         if 'charges' not in st.session_state:
             st.session_state.charges = charges
