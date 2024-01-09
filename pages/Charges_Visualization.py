@@ -21,8 +21,7 @@ if 'charges' in st.session_state:
                             ,'Box Plot'
                             ,'Swarm Plot by Category'
                             ,'Number of Charges by Category'
-                            , 'Monthly Spending'
-                           , 'Violin Distribution'))
+                            , 'Monthly Spending'))
     
   if option == 'Histogram':
       st.subheader('Histogram of All Charges')
@@ -60,20 +59,5 @@ if 'charges' in st.session_state:
         monthly = sns.stripplot(data = charges, x = 'YearMo', y = 'Amount')
         monthly.set_xticklabels(monthly.get_xticklabels(), rotation=40, ha="right")
         st.pyplot(monthly.get_figure())
-  if option == 'Violin Distribution':
-    st.subheader('Violin Distribution of Charges')
-    opt = st.selectbox("Do you want to separate the plots by one of the following categories?"
-                 , ('By Month & Year'
-                    , 'By Category'
-                    , 'None'))
-    if opt == 'By Month & Year':
-        violin = sns.violinplot(data = charges, x = 'Amount', y = 'YearMo')
-        st.pyplot(violin.get_figure())
-    if opt == 'By Category':
-        violin = sns.violinplot(data = charges, x = 'Amount', y = 'Category')
-        st.pyplot(violin.get_figure())
-    if opt == 'None':
-        violin = sns.violinplot(data = charges, x = 'Amount')
-        st.pyplot(violin.get_figure())
 else:
   st.write('Please upload csv files on the main page')
