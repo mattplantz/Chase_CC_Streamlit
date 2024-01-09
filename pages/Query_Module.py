@@ -14,6 +14,7 @@ if 'charges' in st.session_state:
   charges['Year'] = pd.DatetimeIndex(charges['Transaction Date']).year
   charges['YearMo'] = charges['Year'].astype(str) + charges['Month'].astype(str)
   charges['YearMo'] = charges['YearMo'].astype(int)
+  select_str = "SELECT * from charges WHERE 1 = 1"
   with st.sidebar:
     st.write('Filters')
     desc = st.checkbox("Filter on Description?")
