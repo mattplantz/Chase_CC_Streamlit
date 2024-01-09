@@ -13,7 +13,6 @@ if 'charges' in st.session_state:
           continue
   charges['Year'] = pd.DatetimeIndex(charges['Transaction Date']).year
   charges['YearMo'] = charges['Year'].astype(str) + charges['Month'].astype(str)
-  charges['YearMo'] = charges['YearMo'].astype(int)
   select_str = "SELECT * from charges WHERE 1 = 1"
   categories = charges['Category'].unique().tolist()
   with st.sidebar:
