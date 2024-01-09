@@ -14,7 +14,8 @@ st.markdown('''
                  - **Upload Landing Page**: Landing page to upload CSV files containing statement data  
                  - **Query Module**: Interface allowing for SQL-like querying of statement data  
                  - **Visualization**: Module containing multiple premade visualizations of statement data  
-            
+
+             Please use this link to download your own personal chase account activity for usage in the application: https://www.tillerhq.com/how-to-export-chase-bank-statements-into-excel-and-google-sheets/  
             
             For questions on usage or to see the underlying Python script, please visit the Github repository: https://github.com/mattplantz/Chase_CC_Streamlit/  
             Author: Matt Plantz
