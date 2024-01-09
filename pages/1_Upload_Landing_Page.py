@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 
-st.title("Chase Credit Card Statement Reader-Inator")
+st.title("Upload Landing Page")
 
 uploaded_files = st.file_uploader("Please upload your Chase CC Account Activity", type = ['csv'], accept_multiple_files= True)
 if uploaded_files not in st.session_state:
