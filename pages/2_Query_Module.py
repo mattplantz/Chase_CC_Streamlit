@@ -70,6 +70,7 @@ if 'charges' in st.session_state:
           in_cl = in_cl + "'" + val + "'" + ","
       in_cl = in_cl[:-1]
       in_cl = "(" + in_cl + ")"
+      st.write(in_cl)
       if in_cl == '':
         st.write("Please select at least one category from the drop-down list")
         cate_str = ''
