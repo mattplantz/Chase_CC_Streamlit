@@ -126,6 +126,7 @@ if 'charges' in st.session_state:
   if cate and len(in_cl) == 0:
     st.write("Please select a category from the dropdown list")
   else:
+    st.write(len(in_cl))
     results = duckdb.sql(result_str).df()
     results_sum = results['Amount'].sum()
     st.write("There are", results.shape[0], "charges matching your parameters")
