@@ -73,7 +73,7 @@ if 'charges' in st.session_state:
       st.write(in_cl)
       if in_cl == '':
         st.write("Please select at least one category from the drop-down list")
-        cate_str = ''
+        cate_str = 'TEST'
       else:
         cate_str = f" and Category IN {in_cl}" 
       
