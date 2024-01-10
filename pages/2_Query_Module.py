@@ -73,16 +73,16 @@ if 'charges' in st.session_state:
       cate_str = f" and Category IN {in_cl}" 
       
   # all four
-  if desc and amt and date and cate and len(in_cl) >= 1:
+  if desc and amt and date and cate:
       result_str = select_str + desc_str + amt_str + date_str + cate_str
   # no desc
-  elif not desc and amt and date and cate and len(in_cl) >= 1 :
+  elif not desc and amt and date and cate:
       result_str = select_str + amt_str + date_str + cate_str
   # no amt
-  elif desc and not amt and date and cate and len(in_cl) >= 1:
+  elif desc and not amt and date and cate:
       result_str = select_str + desc_str + date_str + cate_str
   # no date
-  elif desc and amt and not date and cate and len(in_cl) >= 1:
+  elif desc and amt and not date and cate:
       result_str = select_str + desc_str + amt_str + cate_str
   # no cate
   elif desc and amt and date and not cate:
@@ -94,16 +94,16 @@ if 'charges' in st.session_state:
   elif desc and date and not amt and not cate:
       result_str = select_str + desc_str + date_str
   # desc and cate
-  elif desc and cate and len(in_cl) >= 1 and not amt and not date:
+  elif desc and cate and not amt and not date:
       result_str = select_str + desc_str + cate_str
   # amt and date
   elif amt and date and not desc and not cate:
       result_str = select_str + amt_str + date_str
   # amt and cate
-  elif amt and cate and len(in_cl) >= 1 and not desc and not date:
+  elif amt and cate and not desc and not date:
       result_str = select_str + amt_str + cate_str
   # date and cate 
-  elif date and cate and len(in_cl) >= 1 and not desc and not amt:
+  elif date and cate and not desc and not amt:
       result_str = select_str + date_str + cate_str
   # just desc
   elif desc and not amt and not date and not cate:
@@ -115,7 +115,7 @@ if 'charges' in st.session_state:
   elif not desc and not amt and date and not cate:
       result_str = select_str + date_str
   # just cate
-  elif not desc and not amt and not date and cate and len(in_cl) >= 1:
+  elif not desc and not amt and not date and cate:
       result_str = select_str + cate_str
   elif not desc and not amt and not date and not cate:
       result_str = select_str
@@ -123,10 +123,13 @@ if 'charges' in st.session_state:
   st.subheader("Query Run")
   st.write(result_str)
   st.subheader("Results")
-  results = duckdb.sql(result_str).df()
-  results_sum = results['Amount'].sum()
-  st.write("There are", results.shape[0], "charges matching your parameters")
-  st.write("The flagged charges have a total value of $", round(results_sum,2))
-  st.dataframe(results)
+  if cate and len(in_cl) == 0:
+    st.write("Please select a category from the dropdown list")
+  else:
+    results = duckdb.sql(result_str).df()
+    results_sum = results['Amount'].sum()
+    st.write("There are", results.shape[0], "charges matching your parameters")
+    st.write("The flagged charges have a total value of $", round(results_sum,2))
+    st.dataframe(results)
 else:
   st.write('Please upload csv files on the Upload Landing Page')
