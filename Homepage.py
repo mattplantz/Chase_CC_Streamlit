@@ -7,7 +7,7 @@ st.markdown('''
                     - **Description**: Description of charge  
                     - **Category**: General category of charge  
                     - **Type**: Sale or Payment. Sale = charge to card; payment = payment of card balance  
-                    - **Amount**: Value of sale or payment  
+                    - **Amount**: Value of sale or payment. Please note that sales will be negative and payments will be positive   
                 
              The application contains four pages:  
                  - **Homepage**: Description of application, inputs, and requirements  
