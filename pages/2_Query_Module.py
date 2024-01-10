@@ -124,8 +124,7 @@ if 'charges' in st.session_state:
   elif not desc and not amt and not date and not cate:
       result_str = select_str
   # output results
-  st.subheader("Query Run")
-  st.write(in_cl, cate_str)
+  st.subheader("Query Executed")
   st.write(result_str)
   st.subheader("Results")
   results = duckdb.sql(result_str).df()
