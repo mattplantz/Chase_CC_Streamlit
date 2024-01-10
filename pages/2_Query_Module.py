@@ -125,6 +125,7 @@ if 'charges' in st.session_state:
       result_str = select_str
   # output results
   st.subheader("Query Run")
+  st.write(in_cl, cate_str)
   st.write(result_str)
   st.subheader("Results")
   results = duckdb.sql(result_str).df()
