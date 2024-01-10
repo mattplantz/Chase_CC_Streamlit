@@ -63,7 +63,7 @@ if 'charges' in st.session_state:
           upper = st.text_input("Please input the upper boundary of the date range")
           date_str = f" and TransactionDate between '{lower}' and '{upper}'"
   if cate:
-      choice = st.multiselect("Selec the category or categories you would like to filter on"
+      choice = st.multiselect("Select the category or categories you would like to filter on"
                             , categories)
       in_cl = ''
       for val in choice:
