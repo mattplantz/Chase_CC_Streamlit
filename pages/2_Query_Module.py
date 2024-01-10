@@ -70,7 +70,11 @@ if 'charges' in st.session_state:
           in_cl = in_cl + "'" + val + "'" + ","
       in_cl = in_cl[:-1]
       in_cl = "(" + in_cl + ")"
-      cate_str = f" and Category IN {in_cl}" 
+      if in_cl == '':
+        st.write("Please select at least one category from the drop-down list")
+        cate_str = ''
+      else:
+        cate_str = f" and Category IN {in_cl}" 
       
   # all four
   if desc and amt and date and cate:
@@ -123,14 +127,10 @@ if 'charges' in st.session_state:
   st.subheader("Query Run")
   st.write(result_str)
   st.subheader("Results")
-  if cate and len(in_cl) == 0:
-    st.write("Please select a category from the dropdown list")
-  else:
-    st.write(len(in_cl))
-    results = duckdb.sql(result_str).df()
-    results_sum = results['Amount'].sum()
-    st.write("There are", results.shape[0], "charges matching your parameters")
-    st.write("The flagged charges have a total value of $", round(results_sum,2))
-    st.dataframe(results)
+  results = duckdb.sql(result_str).df()
+  results_sum = results['Amount'].sum()
+  st.write("There are", results.shape[0], "charges matching your parameters")
+  st.write("The flagged charges have a total value of $", round(results_sum,2))
+  st.dataframe(results)
 else:
   st.write('Please upload csv files on the Upload Landing Page')
